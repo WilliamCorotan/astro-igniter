@@ -69,4 +69,32 @@ class User extends CI_Model
         }
         return false;
     }
+
+    /**
+     * 
+     * Verify if the user login credentials matches the database
+     * @param array $user_data
+     * @return array $result | []
+     * 
+     */
+    public function verify_user($user_data)
+    {
+
+        $result = $this->db
+            ->select('*')
+            ->from('users')
+            ->where('username', $user_data['username_email'])
+            ->or_where('email', $user_data['username_email'])
+            ->get()
+            ->row_array();
+        if (!empty($result)) {
+            if (password_verify($user_data['password'], $result['password'])) {
+
+                return $result;
+            } else {
+
+                return [];
+            }
+        }
+    }
 }
