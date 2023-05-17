@@ -55,7 +55,7 @@
                 //redirects if registered successfully  
                 else {
 
-                    window.location.replace("/");
+                    window.location.replace("/dashboard");
                 }
             }
         });

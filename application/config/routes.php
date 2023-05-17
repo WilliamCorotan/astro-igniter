@@ -58,7 +58,7 @@ $route['login'] = 'auth/show_login';
 $route['register'] = 'auth/show_register';
 $route['login/user'] = 'auth/login';
 $route['register/user'] = 'auth/register';
-
+$route['dashboard'] = 'tasks/index';
 
 
 $route['404_override'] = '';

@@ -49,7 +49,7 @@ class Auth extends CI_Controller
 
         if (!empty($authenticated_user)) {
             $this->session->set_userdata($authenticated_user);
-            $this->session->set_userdata('logged_in', true);
+            $this->session->set_userdata('is_logged_in', true);
             exit(json_encode($authenticated_user));
         } else {
             $json_response['login_errors'] = 'Invalid Credentials, Please Try Again!';
@@ -82,9 +82,6 @@ class Auth extends CI_Controller
                 'profile_picture' => 'user-avatar.png'
             );
             $this->user->insert($form_data);
-
-            $this->session->set_userdata($form_data);
-            $this->session->set_userdata('is_logged_in', true);
 
             $json_response['message'] = 'Registered Successfully!';
             exit(json_encode($json_response));
