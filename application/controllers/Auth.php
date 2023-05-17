@@ -88,6 +88,15 @@ class Auth extends CI_Controller
         }
     }
 
+    public function logout()
+    {
+        $session_data = array('id', 'username', 'email', 'password', 'profile_picture', 'created_at', 'updated_at', 'is_logged_in');
+        $this->session->unset_userdata($session_data);
+
+        $json_response['message'] = 'Logged out successfully!';
+        exit(json_encode($json_response));
+    }
+
     /**
      * 
      * Validates if the email is unique

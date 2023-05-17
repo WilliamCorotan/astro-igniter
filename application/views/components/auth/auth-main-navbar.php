@@ -27,10 +27,10 @@ $profile_picture = $this->session->userdata('profile_picture');
                     <a class="nav-link" href="#">Notification</a>
                 </li>
                 <li class="nav-item  d-block d-lg-none">
-                    <a class="nav-link" href="#">Profile</a>
+                    <a class="profile-button nav-link" type="button" role="button">Profile</a>
                 </li>
                 <li class="nav-item  d-block d-lg-none">
-                    <a class="nav-link" href="#">Logout</a>
+                    <a class="logout-button nav-link" type="button" role="button">Logout</a>
                 </li>
                 <li class="nav-item dropdown d-lg-block d-none">
                     <a class="nav-link dropdown-toggle" type="button" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -41,11 +41,25 @@ $profile_picture = $this->session->userdata('profile_picture');
                         <li>
                             <hr class="dropdown-divider">
                         </li>
-                        <li><a class="profile-button dropdown-item" href="#" type="button" role="button">Profile</a></li>
-                        <li><a class="logout-button dropdown-item" href="#" type="button" role="button">Logout</a></li>
+                        <li><a class="profile-button dropdown-item" type="button" role="button">Profile</a></li>
+                        <li><a class="logout-button dropdown-item" type="button" role="button">Logout</a></li>
                     </ul>
                 </li>
             </ul>
         </div>
     </div>
 </nav>
+
+<script>
+    $('#main-navbar').on('click', '.logout-button', function() {
+        $.ajax({
+            type: "post",
+            url: "logout",
+            dataType: "json",
+            success: function(response) {
+                console.log('logged out')
+                window.location.replace('/')
+            }
+        });
+    })
+</script>
