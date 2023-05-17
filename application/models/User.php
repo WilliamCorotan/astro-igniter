@@ -57,6 +57,8 @@ class User extends CI_Model
     /**
      * 
      * Validates if the email is unique
+     * @param string $email
+     * @return boolean
      * 
      */
     public function is_unique_email($email)

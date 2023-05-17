@@ -76,6 +76,8 @@ class Auth extends CI_Controller
     /**
      * 
      * Validates if the email is unique
+     * @param string $email
+     * @return boolean
      * 
      */
     public function validate_unique_email($email)

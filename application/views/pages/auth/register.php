@@ -54,13 +54,14 @@
             data: $(this).serialize(),
             dataType: "json",
             beforeSend: function() {
-                console.log($('.form-button'))
+
                 $('.form-button').attr('disabled')
                 $('.form-button').addClass('disabled')
                 $('.form-button').html(spinner)
 
             },
             success: function(response) {
+                //resets error fields
                 $('#username-errors').html('')
                 $('#username-errors').parent().addClass('hidden')
 
@@ -73,10 +74,13 @@
                 $('#confirm-password-errors').html('')
                 $('#confirm-password-errors').parent().addClass('hidden')
 
+                //reset button loading state
                 $('.form-button').removeAttr('disabled')
                 $('.form-button').removeClass('disabled')
                 $('.form-button').html('Register')
-                console.log(response);
+
+
+                //Checks if response contains form errors
                 if (response.form_errors) {
                     if (response.form_errors.username) {
                         $('#username-errors').html(response.form_errors.username)
@@ -98,7 +102,10 @@
                         $('#confirm-password-errors').parent().removeClass('hidden')
                         console.log(response.form_errors.confirm_password)
                     }
-                } else {
+                }
+                //redirects if registered successfully  
+                else {
+
                     window.location.replace("/");
                 }
 
