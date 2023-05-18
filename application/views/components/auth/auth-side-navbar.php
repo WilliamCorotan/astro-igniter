@@ -1,30 +1,37 @@
-<!-- Nav tabs -->
-<ul class="nav nav-tabs" id="navId" role="tablist">
-    <li class="nav-item">
-        <a href="#tab1Id" class="nav-link active" data-bs-toggle="tab" aria-current="page">Active</a>
-    </li>
-    <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
-        <div class="dropdown-menu">
-            <a class="dropdown-item" href="#tab2Id">Action</a>
-            <a class="dropdown-item" href="#tab3Id">Another action</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#tab4Id">Action</a>
-        </div>
-    </li>
-    <li class="nav-item" role="presentation">
-        <a href="#tab5Id" class="nav-link" data-bs-toggle="tab">Another link</a>
-    </li>
-    <li class="nav-item" role="presentation">
-        <a href="#" class="nav-link disabled" data-bs-toggle="tab">Disabled</a>
-    </li>
+<ul class="list-group position-absolute m-4 fs-5">
+    <li id="side-navbar-toggle" class="list-group-item d-inline-block text-bg-dark"><i class="fa-solid fa-bars"></i></li>
+    <li class="list-group-item d-inline-block text-bg-dark"><i class="fa-solid fa-clipboard-list"></i></li>
+    <li class="list-group-item d-inline-block text-bg-dark"><i class="fa-solid fa-note-sticky"></i></li>
+    <li id="side-navbar-quote-toggle" class="list-group-item d-inline-block text-bg-dark"><i class="fa-solid fa-quote-right"></i></li>
 </ul>
 
-<!-- Tab panes -->
-<div class="tab-content" id="myTabContent">
-    <div class="tab-pane fade show active" id="tab1Id" role="tabpanel"></div>
-    <div class="tab-pane fade" id="tab2Id" role="tabpanel"></div>
-    <div class="tab-pane fade" id="tab3Id" role="tabpanel"></div>
-    <div class="tab-pane fade" id="tab4Id" role="tabpanel"></div>
-    <div class="tab-pane fade" id="tab5Id" role="tabpanel"></div>
-</div>
+
+<script>
+    $(document).ready(function() {
+        $('#side-navbar-toggle').on('click', function() {
+            $(this).siblings().toggleClass('d-none')
+        })
+
+        $('#side-navbar-quote-toggle').on('click', function() {
+            $('#quote-block').toggle()
+            if ($('#quote-block').is(':visible')) {
+                console.log('me heree')
+                $('#side-navbar-quote-toggle').addClass('text-bg-success')
+                $('#side-navbar-quote-toggle').removeClass('text-bg-dark')
+            } else {
+                console.log('is mee')
+                $('#side-navbar-quote-toggle').addClass('text-bg-dark')
+                $('#side-navbar-quote-toggle').removeClass('text-bg-success')
+            }
+        })
+        if ($('#quote-block').is(':visible')) {
+            console.log('me heree')
+            $('#side-navbar-quote-toggle').addClass('text-bg-success')
+            $('#side-navbar-quote-toggle').removeClass('text-bg-dark')
+        } else {
+            console.log('is mee')
+            $('#side-navbar-quote-toggle').addClass('text-bg-dark')
+            $('#side-navbar-quote-toggle').removeClass('text-bg-success')
+        }
+    });
+</script>
