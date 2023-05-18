@@ -23,6 +23,13 @@
             background-repeat: no-repeat;
             background-size: cover;
             background-position: center;
+            min-height: calc(100vh - 56px) !important;
+        }
+
+        @media (min-width: 992px) {
+            #app {
+                min-height: calc(100vh - 112px) !important;
+            }
         }
     </style>
     <!-- JQuery CDN -->
@@ -39,4 +46,4 @@
         <?php $this->load->view('components/auth/auth-main-navbar'); ?>
     </header>
 
-    <main id="app" class="min-vh-100">
+    <main id="app">

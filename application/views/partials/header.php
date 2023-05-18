@@ -23,6 +23,7 @@
             background-repeat: no-repeat;
             background-size: cover;
             background-position: center;
+            min-height: calc(100vh - 56px) !important;
         }
     </style>
     <!-- JQuery CDN -->
@@ -39,4 +40,4 @@
         <?php $this->load->view('components/main-navbar'); ?>
     </header>
 
-    <main id="app" class="min-vh-100">
+    <main id="app">
