@@ -26,7 +26,9 @@
             min-height: calc(100vh - 56px) !important;
         }
 
+
         @media (min-width: 992px) {
+
             #app {
                 min-height: calc(100vh - 112px) !important;
             }

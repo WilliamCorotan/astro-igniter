@@ -2,12 +2,13 @@
 
 $this->load->view('components/auth/auth-side-navbar');
 $this->load->view('components/quote-block');
+$this->load->view('components/tasks/task-block');
+$this->load->view('components/tasks/view-task');
 ?>
-
 
 <script>
     $(document).ready(function() {
-        $("#quote-block").draggable({
+        $(".draggable").draggable({
             containment: "#app",
             scroll: false
         });

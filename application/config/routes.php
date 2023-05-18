@@ -61,6 +61,12 @@ $route['register/user'] = 'auth/register';
 $route['logout'] = 'auth/logout';
 $route['dashboard'] = 'tasks/index';
 
+/**
+ * Tasks Routes
+ */
+
+$route['api/v1/tasks'] = 'tasks/get_all_by_user';
+$route['api/v1/tasks/store'] = 'tasks/store';
 
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;

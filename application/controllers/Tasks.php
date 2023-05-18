@@ -14,6 +14,7 @@ class Tasks extends CI_Controller
         $this->load->view('pages/tasks/index');
     }
 
+
     /**
      * 
      * Shows form for creating a new data
@@ -30,6 +31,19 @@ class Tasks extends CI_Controller
      */
     public function store()
     {
+        $data = array(
+            'title' =>  $this->input->post('title'),
+            'body' => $this->input->post('body'),
+            'start_date' => $this->input->post('start_date'),
+            'due_date' => $this->input->post('due_date'),
+            'priority_level_id' => $this->input->post('priority_level'),
+            'user_id' => $this->session->userdata('id'),
+            'status_id' => 1,
+        );
+        $this->task->insert($data);
+        $json_response['data'] = $data;
+
+        exit(json_encode($json_response['data']));
     }
 
     /**
@@ -70,5 +84,11 @@ class Tasks extends CI_Controller
      */
     public function destroy($id)
     {
+    }
+
+    public function get_all_by_user()
+    {
+        $json_response['data'] = $this->task->fetch_by_user($this->session->userdata('id'));
+        exit(json_encode($json_response));
     }
 }
