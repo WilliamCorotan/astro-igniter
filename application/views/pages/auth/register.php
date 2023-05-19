@@ -45,71 +45,73 @@
 </section>
 
 <script>
-    $('#app').on('submit', '#register-form', function(event) {
-        event.preventDefault();
-        const spinner = `<div class="spinner-border text-secondary" role="status"> <span class = "visually-hidden" > Loading... </span> </div>`
-        $.ajax({
-            type: "POST",
-            url: "<?= site_url('/register/user') ?>",
-            data: $(this).serialize(),
-            dataType: "json",
-            beforeSend: function() {
+    $(document).ready(function() {
+        $('#app').on('submit', '#register-form', function(event) {
+            event.preventDefault();
+            const spinner = `<div class="spinner-border text-secondary" role="status"> <span class = "visually-hidden" > Loading... </span> </div>`
+            $.ajax({
+                type: "POST",
+                url: "<?= site_url('/register/user') ?>",
+                data: $(this).serialize(),
+                dataType: "json",
+                beforeSend: function() {
 
-                $('.form-button').attr('disabled')
-                $('.form-button').addClass('disabled')
-                $('.form-button').html(spinner)
+                    $('.form-button').attr('disabled')
+                    $('.form-button').addClass('disabled')
+                    $('.form-button').html(spinner)
 
-            },
-            success: function(response) {
-                //resets error fields
-                $('#username-errors').html('')
-                $('#username-errors').parent().addClass('hidden')
+                },
+                success: function(response) {
+                    //resets error fields
+                    $('#username-errors').html('')
+                    $('#username-errors').parent().addClass('hidden')
 
-                $('#email-errors').html('')
-                $('#email-errors').parent().addClass('hidden')
+                    $('#email-errors').html('')
+                    $('#email-errors').parent().addClass('hidden')
 
-                $('#password-errors').html('')
-                $('#password-errors').parent().addClass('hidden')
+                    $('#password-errors').html('')
+                    $('#password-errors').parent().addClass('hidden')
 
-                $('#confirm-password-errors').html('')
-                $('#confirm-password-errors').parent().addClass('hidden')
+                    $('#confirm-password-errors').html('')
+                    $('#confirm-password-errors').parent().addClass('hidden')
 
-                //reset button loading state
-                $('.form-button').removeAttr('disabled')
-                $('.form-button').removeClass('disabled')
-                $('.form-button').html('Register')
+                    //reset button loading state
+                    $('.form-button').removeAttr('disabled')
+                    $('.form-button').removeClass('disabled')
+                    $('.form-button').html('Register')
 
 
-                //Checks if response contains form errors
-                if (response.form_errors) {
-                    if (response.form_errors.username) {
-                        $('#username-errors').html(response.form_errors.username)
-                        $('#username-errors').parent().removeClass('hidden')
-                        console.log(response.form_errors.username)
+                    //Checks if response contains form errors
+                    if (response.form_errors) {
+                        if (response.form_errors.username) {
+                            $('#username-errors').html(response.form_errors.username)
+                            $('#username-errors').parent().removeClass('hidden')
+                            console.log(response.form_errors.username)
+                        }
+                        if (response.form_errors.email) {
+                            $('#email-errors').html(response.form_errors.email)
+                            $('#email-errors').parent().removeClass('hidden')
+                            console.log(response.form_errors.email)
+                        }
+                        if (response.form_errors.password) {
+                            $('#password-errors').html(response.form_errors.password)
+                            $('#password-errors').parent().removeClass('hidden')
+                            console.log(response.form_errors.password)
+                        }
+                        if (response.form_errors.confirm_password) {
+                            $('#confirm-password-errors').html(response.form_errors.confirm_password)
+                            $('#confirm-password-errors').parent().removeClass('hidden')
+                            console.log(response.form_errors.confirm_password)
+                        }
                     }
-                    if (response.form_errors.email) {
-                        $('#email-errors').html(response.form_errors.email)
-                        $('#email-errors').parent().removeClass('hidden')
-                        console.log(response.form_errors.email)
+                    //redirects if registered successfully  
+                    else {
+
+                        window.location.replace("/login");
                     }
-                    if (response.form_errors.password) {
-                        $('#password-errors').html(response.form_errors.password)
-                        $('#password-errors').parent().removeClass('hidden')
-                        console.log(response.form_errors.password)
-                    }
-                    if (response.form_errors.confirm_password) {
-                        $('#confirm-password-errors').html(response.form_errors.confirm_password)
-                        $('#confirm-password-errors').parent().removeClass('hidden')
-                        console.log(response.form_errors.confirm_password)
-                    }
+
                 }
-                //redirects if registered successfully  
-                else {
-
-                    window.location.replace("/login");
-                }
-
-            }
-        });
-    })
+            });
+        })
+    });
 </script>

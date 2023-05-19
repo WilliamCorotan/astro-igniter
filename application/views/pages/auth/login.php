@@ -23,42 +23,44 @@
 </section>
 
 <script>
-    $('#app').on('submit', "#login-form", function(event) {
-        event.preventDefault();
-        const spinner = `<div class="spinner-border text-secondary" role="status"> <span class = "visually-hidden" > Loading... </span> </div>`;
+    $(document).ready(function() {
+        $('#app').on('submit', "#login-form", function(event) {
+            event.preventDefault();
+            const spinner = `<div class="spinner-border text-secondary" role="status"> <span class = "visually-hidden" > Loading... </span> </div>`;
 
-        $.ajax({
-            type: "post",
-            url: "login/user",
-            data: $(this).serialize(),
-            dataType: "json",
-            beforeSend: function() {
-                $('.form-button').attr('disabled');
-                $('.form-button').addClass('disabled');
-                $('.form-button').html(spinner);
-            },
-            success: function(response) {
-                //reset button loading state
-                $('.form-button').removeAttr('disabled')
-                $('.form-button').removeClass('disabled')
-                $('.form-button').html('Login')
+            $.ajax({
+                type: "post",
+                url: "login/user",
+                data: $(this).serialize(),
+                dataType: "json",
+                beforeSend: function() {
+                    $('.form-button').attr('disabled');
+                    $('.form-button').addClass('disabled');
+                    $('.form-button').html(spinner);
+                },
+                success: function(response) {
+                    //reset button loading state
+                    $('.form-button').removeAttr('disabled')
+                    $('.form-button').removeClass('disabled')
+                    $('.form-button').html('Login')
 
 
-                $('#login-errors').html('')
-                $('#login-errors').parent().addClass('hidden')
+                    $('#login-errors').html('')
+                    $('#login-errors').parent().addClass('hidden')
 
-                //Checks if response contains form errors
-                if (response.login_errors) {
-                    $('#login-errors').html(response.login_errors)
-                    $('#login-errors').parent().removeClass('hidden')
+                    //Checks if response contains form errors
+                    if (response.login_errors) {
+                        $('#login-errors').html(response.login_errors)
+                        $('#login-errors').parent().removeClass('hidden')
+                    }
+                    //redirects if registered successfully  
+                    else {
+
+                        window.location.replace("/dashboard");
+                    }
                 }
-                //redirects if registered successfully  
-                else {
+            });
 
-                    window.location.replace("/dashboard");
-                }
-            }
-        });
-
-    })
+        })
+    });
 </script>

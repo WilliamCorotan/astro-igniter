@@ -46,12 +46,12 @@
                     <span>${dueDate}</span>
                     </div>
 
-                    <input type="hidden" class="form-control" name="title" id="title" value="${title}">
-                    <input type="hidden" class="form-control" name="body" id="body" value="${body}">
-                    <input type="hidden" class="form-control" name="start_date" id="start_date" value="${startDate}">
-                    <input type="hidden" class="form-control" name="due_date" id="due_date" value="${dueDate}">
-                    <input type="hidden" class="form-control" name="priority_level" id="priority_level" value="${priorityLevel}">
-                    <input type="hidden" class="form-control" name="status" id="status" value="${status}">
+                    <input type="hidden" class="form-control" name="title"  value="${title}">
+                    <input type="hidden" class="form-control" name="body"  value="${body}">
+                    <input type="hidden" class="form-control" name="start_date"  value="${startDate}">
+                    <input type="hidden" class="form-control" name="due_date"  value="${dueDate}">
+                    <input type="hidden" class="form-control" name="priority_level"  value="${priorityLevel}">
+                    <input type="hidden" class="form-control" name="status"  value="${status}">
 
                 </div>
                 `)
@@ -79,7 +79,7 @@
             $(this).css('cursor', 'pointer')
         })
 
-        $('#app').on('click', '.task-card', function() {
+        $(document).on('click', '.task-card', function() {
             const title = $(this).children('input[name="title"]').val()
             const body = $(this).children('input[name="body"]').val()
             const startDate = $(this).children('input[name="start_date"]').val()

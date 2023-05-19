@@ -33,7 +33,7 @@ $profile_picture = $this->session->userdata('profile_picture');
                     <a class="logout-button nav-link" type="button" role="button">Logout</a>
                 </li>
                 <li class="nav-item dropdown d-lg-block d-none">
-                    <a class="nav-link dropdown-toggle" type="button" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle" type="button" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         <img src="<?= base_url("/assets/images/profile_pictures/$profile_picture") ?>" class="h-100" alt="" width="48px">
                     </a>
                     <ul class="dropdown-menu">
@@ -51,15 +51,17 @@ $profile_picture = $this->session->userdata('profile_picture');
 </nav>
 
 <script>
-    $('#main-navbar').on('click', '.logout-button', function() {
-        $.ajax({
-            type: "post",
-            url: "logout",
-            dataType: "json",
-            success: function(response) {
-                console.log('logged out')
-                window.location.replace('/')
-            }
-        });
-    })
+    $(document).ready(function() {
+        $('#main-navbar').on('click', '.logout-button', function() {
+            $.ajax({
+                type: "post",
+                url: "logout",
+                dataType: "json",
+                success: function(response) {
+                    console.log('logged out')
+                    window.location.replace('/')
+                }
+            });
+        })
+    });
 </script>

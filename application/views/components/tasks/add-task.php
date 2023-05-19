@@ -45,7 +45,7 @@
 <script>
     $(document).ready(function() {
         function fetchTasks() {
-            const taskBlock = (title, priorityLevel, dueDate) => {
+            const taskBlock = (title, body, startDate, dueDate, priorityLevel, status) => {
                 switch (priorityLevel) {
                     case 'high':
                         priorityLevelStyle = 'text-bg-danger'
@@ -68,6 +68,14 @@
                     <div>
                     <span>${dueDate}</span>
                     </div>
+
+                    <input type="hidden" class="form-control" name="title" id="title" value="${title}">
+                    <input type="hidden" class="form-control" name="body" id="body" value="${body}">
+                    <input type="hidden" class="form-control" name="start_date" id="start_date" value="${startDate}">
+                    <input type="hidden" class="form-control" name="due_date" id="due_date" value="${dueDate}">
+                    <input type="hidden" class="form-control" name="priority_level" id="priority_level" value="${priorityLevel}">
+                    <input type="hidden" class="form-control" name="status" id="status" value="${status}">
+
                 </div>
                 `)
             };
@@ -79,7 +87,7 @@
                     console.log(response)
                     $('#task-container').children().remove();
                     response.data.map(task => {
-                        return $('#task-container').append(taskBlock(task.title, task.priority_level_code, task.start_date, task.due_date));
+                        return $('#task-container').append(taskBlock(task.title, task.body, task.start_date, task.due_date, task.priority_level_code, task.status_code));
                     })
                 }
             });

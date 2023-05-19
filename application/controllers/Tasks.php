@@ -12,6 +12,7 @@ class Tasks extends CI_Controller
     {
         $this->load->view('partials/auth/auth-header');
         $this->load->view('pages/tasks/index');
+        $this->load->view('partials/auth/auth-footer');
     }
 
 
