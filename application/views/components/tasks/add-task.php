@@ -55,17 +55,17 @@
                         break;
                 }
                 return (`
-                <div class="task-card w-100 d-flex p-2 mb-2 border border-secondary justify-content-between">
-                    <div class="grid">
-                        <span>${title}</span>
-                        <div>
-                            <span class="badge rounded-pill ${priorityLevelStyle}">${priorityLevel}</span>
+                <div class="task-card w-100 row m-0 px-2 mb-2 border border-secondary ">
+                    <div class="col-5 pt-2">
+                        <span class="text-break">${title}</span>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center col-7">
+                        <div class="mx-2 flex-grow-1">
+                            <span>${dueDate}</span>
                         </div>
+                        <div class="p-2 text-primary"><i class="fa-solid fa-pencil"></i></div>
+                        <div class="p-2 text-danger"><i class="fa-solid fa-trash-can"></i></div>
                     </div>
-                    <div>
-                    <span>${dueDate}</span>
-                    </div>
-
                     <input type="hidden" class="form-control" name="id"  value="${id}">
                     <input type="hidden" class="form-control" name="title"  value="${title}">
                     <input type="hidden" class="form-control" name="body"  value="${body}">
@@ -73,8 +73,7 @@
                     <input type="hidden" class="form-control" name="due_date"  value="${dueDate}">
                     <input type="hidden" class="form-control" name="priority_level"  value="${priorityLevel}">
                     <input type="hidden" class="form-control" name="status"  value="${status}">
-
-                </div>
+                </?div>
                 `)
             };
             $.ajax({
