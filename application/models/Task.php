@@ -20,6 +20,14 @@ class Task extends CI_Model
      */
     public function get($id)
     {
+        $data = $this->db
+            ->select('tasks.id, tasks.title, tasks.body, tasks.start_date, tasks.due_date, statuses.code as status_code, priority_levels.code as priority_level_code')
+            ->from('tasks')
+            ->where('tasks.id', $id)
+            ->join('priority_levels', 'tasks.priority_level_id = priority_levels.id')
+            ->join('statuses', 'tasks.status_id = statuses.id')
+            ->get();
+        return $data->row();
     }
 
     /**

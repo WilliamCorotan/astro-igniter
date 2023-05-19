@@ -55,6 +55,9 @@ class Tasks extends CI_Controller
      */
     public function show($id)
     {
+        $result = $this->task->get($id);
+        $view_modal = $this->load->view('components/tasks/view-task', $result);
+        return $view_modal;
     }
 
     /**

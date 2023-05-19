@@ -22,7 +22,7 @@
 <script>
     $(document).ready(function() {
         function fetchTasks() {
-            const taskBlock = (title, body, startDate, dueDate, priorityLevel, status) => {
+            const taskBlock = (id, title, body, startDate, dueDate, priorityLevel, status) => {
                 switch (priorityLevel) {
                     case 'high':
                         priorityLevelStyle = 'text-bg-danger'
@@ -46,6 +46,7 @@
                     <span>${dueDate}</span>
                     </div>
 
+                    <input type="hidden" class="form-control" name="id"  value="${id}">
                     <input type="hidden" class="form-control" name="title"  value="${title}">
                     <input type="hidden" class="form-control" name="body"  value="${body}">
                     <input type="hidden" class="form-control" name="start_date"  value="${startDate}">
@@ -64,7 +65,7 @@
                     console.log(response)
                     if (response.data.length) {
                         response.data.map(task => {
-                            return $('#task-container').append(taskBlock(task.title, task.body, task.start_date, task.due_date, task.priority_level_code, task.status_code));
+                            return $('#task-container').append(taskBlock(task.id, task.title, task.body, task.start_date, task.due_date, task.priority_level_code, task.status_code));
                         })
                     } else {
                         $('#task-container').append('<div class="text-center text-secondary"> <small> No Tasks! Keep the productivity up!</small> </div>');
@@ -80,6 +81,7 @@
         })
 
         $(document).on('click', '.task-card', function() {
+            const id = $(this).children('input[name="id"]').val()
             const title = $(this).children('input[name="title"]').val()
             const body = $(this).children('input[name="body"]').val()
             const startDate = $(this).children('input[name="start_date"]').val()
@@ -87,14 +89,15 @@
             const priorityLevel = $(this).children('input[name="priority_level"]').val()
             const status = $(this).children('input[name="status"]').val()
 
-            $('#task-modal').find('.task-title').html(title);
-            $('#task-modal').find('.task-body').html(body);
-            $('#task-modal').find('.task-start-date').html('Start date: ' + startDate);
-            $('#task-modal').find('.task-due-date').html('Due date: ' + dueDate);
-            $('#task-modal').find('.task-status').html(status);
-            $('#task-modal').find('.task-priority-level').html(priorityLevel);
-
-            $('#task-modal').toggle()
+            $.ajax({
+                type: "get",
+                url: `api/v1/tasks/${id}`,
+                dataType: "html",
+                success: function(response) {
+                    console.log(response)
+                    $('#app').append(response)
+                }
+            });
         })
 
         $('#add-task').on('click', function() {
