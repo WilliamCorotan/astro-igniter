@@ -1,21 +1,21 @@
 <div class="m-2">
-    <div id="task-block" class="drag-block card draggable ui-widget-content bg-dark  position-relative" style="max-width: 24rem;">
-        <div class="card-header text-end">
-            <span class="px-1"><i class="close fa-solid fa-xmark"></i></span>
-        </div>
-        <div class="card-body">
-            <div class="card-title fw-bold d-flex justify-content-between align-items-center">
-                <span>Task tracker</span>
-                <a name="add-task" id="add-task" class="btn btn-primary fs-6" role="button">Add</a>
-            </div>
-            <?php $this->load->view('components/tasks/add-task') ?>
-            <div id="task-container">
-
-            </div>
-        </div>
-
-
+    <div id="task-block" class="drag-block card draggable ui-widget-content bg-dark  position-relative" style="max-width: 24rem; max-height: calc(100vh - 56px) !important;"">
+        <div class=" card-header text-end">
+        <span class="px-1"><i class="close fa-solid fa-xmark"></i></span>
     </div>
+    <div class="card-body ">
+        <div class="card-title fw-bold d-flex justify-content-between align-items-center">
+            <span>Task tracker</span>
+            <a name="add-task" id="add-task" class="btn btn-primary fs-6" role="button">Add</a>
+        </div>
+        <?php $this->load->view('components/tasks/add-task') ?>
+        <div id="task-container" class="overflow-hidden">
+
+        </div>
+    </div>
+
+
+</div>
 </div>
 
 

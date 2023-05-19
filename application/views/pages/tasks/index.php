@@ -17,6 +17,15 @@ $this->load->view('components/tasks/task-block');
             $(this).parents('.drag-block').hide();
             $('#side-navbar-quote-toggle').addClass('text-bg-dark')
             $('#side-navbar-quote-toggle').removeClass('text-bg-success')
+            if ($('#task-block').is(':visible')) {
+                console.log('me heree')
+                $('#side-navbar-task-toggle').addClass('text-bg-success')
+                $('#side-navbar-task-toggle').removeClass('text-bg-dark')
+            } else {
+                console.log('is mee')
+                $('#side-navbar-task-toggle').addClass('text-bg-dark')
+                $('#side-navbar-task-toggle').removeClass('text-bg-success')
+            }
         })
     });
 </script>
