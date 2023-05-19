@@ -22,6 +22,8 @@
 
 <script>
     $(document).ready(function() {
+
+
         function fetchTasks() {
             const taskBlock = (id, title, body, startDate, dueDate, priorityLevel, status) => {
                 switch (priorityLevel) {
@@ -44,8 +46,8 @@
                         <div class="mx-2 flex-grow-1">
                             <span>${dueDate}</span>
                         </div>
-                        <div class="p-2 text-primary"><i class="fa-solid fa-pencil"></i></div>
-                        <div class="p-2 text-danger"><i class="fa-solid fa-trash-can"></i></div>
+                        <div id="edit-task" class="p-2 text-primary"><i class="fa-solid fa-pencil"></i></div>
+                        <div id="delete-task" class="p-2 text-danger"><i class="fa-solid fa-trash-can"></i></div>
                     </div>
                     <input type="hidden" class="form-control" name="id"  value="${id}">
                     <input type="hidden" class="form-control" name="title"  value="${title}">
@@ -119,6 +121,18 @@
             $(this).addClass('bg-primary')
         }).draggable()
 
+        $(document).on('click', '#edit-task', function(event) {
+            const id = $(this).parent().siblings('input[name="id"]').val()
+            event.stopPropagation();
+            $.ajax({
+                type: "get",
+                url: `api/v1/tasks/edit/${id}`,
+                dataType: "html",
+                success: function(response) {
+                    $('#app').append(response)
+                }
+            });
+        })
 
         $(document).on('click', '#clear-tasks', function() {
             const userId = '<?= $this->session->userdata('id') ?>';

@@ -68,6 +68,9 @@ class Tasks extends CI_Controller
      */
     public function edit($id)
     {
+        $result = $this->task->get($id);
+        $edit_modal = $this->load->view('components/tasks/edit-task', $result);
+        return $edit_modal;
     }
 
     /**
