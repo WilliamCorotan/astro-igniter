@@ -67,6 +67,7 @@ $route['logout'] = 'auth/logout';
 $route['dashboard'] = 'tasks/index';
 $route['api/v1/tasks'] = 'tasks/get_all_by_user';
 $route['api/v1/tasks/store'] = 'tasks/store';
+$route['api/v1/tasks/clear/(:any)'] = 'tasks/destroy_all/$1';
 $route['api/v1/tasks/(:any)'] = 'tasks/show/$1';
 
 $route['404_override'] = '';

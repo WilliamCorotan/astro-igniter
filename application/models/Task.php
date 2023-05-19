@@ -62,6 +62,17 @@ class Task extends CI_Model
     {
     }
 
+    /**
+     * 
+     * Deletes all data in the database
+     * @param int $user_id
+     * 
+     */
+    public function delete_all($user_id)
+    {
+        return $this->db->delete('tasks', array('user_id' => $user_id));
+    }
+
     public function fetch_by_user($id)
     {
 

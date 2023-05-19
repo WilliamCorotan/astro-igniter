@@ -11,7 +11,7 @@
                 <h5 class="task-title"><?= $title ?></h5>
                 <span class="badge rounded-pill text-bg-primary"><?= $priority_level_code ?></span>
                 <div id="status-dropdown" class="dropdown">
-                    <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <button class="btn btn-dark dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                         <span class="task-status"><?= $status_code ?></span>
                     </button>
                     <ul id="status-dropdown-menu" class="dropdown-menu">
@@ -34,6 +34,14 @@
         $('.modal-close').on('click', function() {
             $('#task-modal').remove()
         })
+
+        if ($('.badge').html() == 'high') {
+            $('.badge').addClass('bg-danger')
+        } else if ($('.badge').html() == 'medium') {
+            $('.badge').addClass('bg-success')
+        } else if ($('.badge').html() == 'low') {
+            $('.badge').addClass('bg-primary')
+        }
 
         $('#task-modal-overlay').on('click', function() {
             $('#task-modal').remove()

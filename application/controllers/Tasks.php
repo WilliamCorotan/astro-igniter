@@ -90,6 +90,20 @@ class Tasks extends CI_Controller
     {
     }
 
+    /**
+     * 
+     * Deletes specific data from the database
+     * @param int $id
+     * 
+     */
+    public function destroy_all($user_id)
+    {
+        $this->task->delete_all($user_id);
+        $json_response['message'] = 'Successfully cleared all tasks';
+        exit($json_response['message']);
+    }
+
+
     public function get_all_by_user()
     {
         $json_response['data'] = $this->task->fetch_by_user($this->session->userdata('id'));

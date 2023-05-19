@@ -6,6 +6,7 @@
     <div class="card-body ">
         <div class="card-title fw-bold d-flex justify-content-between align-items-center">
             <span>Task tracker</span>
+            <a name="clear-tasks" id="clear-tasks" class="btn btn-outline-danger fs-6" role="button">Clear tasks</a>
             <a name="add-task" id="add-task" class="btn btn-primary fs-6" role="button">Add</a>
         </div>
         <?php $this->load->view('components/tasks/add-task') ?>
@@ -68,6 +69,7 @@
                             return $('#task-container').append(taskBlock(task.id, task.title, task.body, task.start_date, task.due_date, task.priority_level_code, task.status_code));
                         })
                     } else {
+                        $('#task-container').children().remove();
                         $('#task-container').append('<div class="text-center text-secondary"> <small> No Tasks! Keep the productivity up!</small> </div>');
                     }
 
@@ -111,6 +113,22 @@
                 $(this).removeClass('btn-danger');
                 $(this).addClass('btn-primary');
             }
+        });
+
+        $(document).on('click', '#clear-tasks', function() {
+            const userId = '<?= $this->session->userdata('id') ?>';
+
+            $.ajax({
+                type: "delete",
+                url: `api/v1/tasks/clear/${userId}`,
+                success: function(response) {
+                    console.log('me reset');
+                    fetchTasks();
+                },
+                error: function(error) {
+                    console.log(error.responseText)
+                }
+            });
         });
 
     });

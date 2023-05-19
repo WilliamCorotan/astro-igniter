@@ -9,26 +9,14 @@ $profile_picture = $this->session->userdata('profile_picture');
         </button>
 
         <div class="collapse navbar-collapse my-3" id="navbarSupportedContent">
-            <!-- Search Form -->
-            <form id="search-form" class="d-flex" role="search">
-                <input class="form-control me-2" type="search" name="query" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success" type="submit">Search</button>
-            </form>
-
-            <div class="mt-3 d-block d-lg-none text-center fs-5">
-                <span>Welcome back, <?= $this->session->userdata('username') ?></span>
-            </div>
             <!-- Navigation Items -->
-            <ul class="navbar-nav ms-auto mb-2 mb-lg-0 d-flex align-items-center">
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Notification</a>
-                </li>
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0 d-flex justify-items-center align-items-center">
                 <li class="nav-item  d-block d-lg-none">
                     <a class="profile-button nav-link" type="button" role="button">Profile</a>
                 </li>
+                <div class="text-center fs-5">
+                    <span>Welcome back, <?= $this->session->userdata('username') ?></span>
+                </div>
                 <li class="nav-item  d-block d-lg-none">
                     <a class="logout-button nav-link" type="button" role="button">Logout</a>
                 </li>
@@ -37,11 +25,10 @@ $profile_picture = $this->session->userdata('profile_picture');
                         <img src="<?= base_url("/assets/images/profile_pictures/$profile_picture") ?>" class="h-100" alt="" width="48px">
                     </a>
                     <ul class="dropdown-menu">
-                        <li class="dropdown-item text-wrap">Welcome back, <?= $this->session->userdata('username') ?></li>
+                        <li><a class="profile-button dropdown-item" type="button" role="button">Profile</a></li>
                         <li>
                             <hr class="dropdown-divider">
                         </li>
-                        <li><a class="profile-button dropdown-item" type="button" role="button">Profile</a></li>
                         <li><a class="logout-button dropdown-item" type="button" role="button">Logout</a></li>
                     </ul>
                 </li>
