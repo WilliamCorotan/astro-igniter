@@ -59,12 +59,12 @@ $route['register'] = 'auth/show_register';
 $route['login/user'] = 'auth/login';
 $route['register/user'] = 'auth/register';
 $route['logout'] = 'auth/logout';
-$route['dashboard'] = 'tasks/index';
 
 /**
  * Tasks Routes
  */
 
+$route['dashboard'] = 'tasks/index';
 $route['api/v1/tasks'] = 'tasks/get_all_by_user';
 $route['api/v1/tasks/store'] = 'tasks/store';
 $route['api/v1/tasks/(:any)'] = 'tasks/show/$1';
