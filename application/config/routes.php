@@ -59,6 +59,8 @@ $route['register'] = 'auth/show_register';
 $route['login/user'] = 'auth/login';
 $route['register/user'] = 'auth/register';
 $route['logout'] = 'auth/logout';
+$route['profile'] = 'auth/show_profile';
+$route['profile/update'] = 'auth/update_profile';
 
 /**
  * Tasks Routes

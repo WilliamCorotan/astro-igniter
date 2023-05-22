@@ -10,7 +10,8 @@ class Tasks extends CI_Controller
      */
     public function index()
     {
-        $this->load->view('partials/auth/auth-header');
+        $data['overflow'] = 'overflow-hidden';
+        $this->load->view('partials/auth/auth-header', $data);
         $this->load->view('pages/tasks/index');
         $this->load->view('partials/auth/auth-footer');
     }

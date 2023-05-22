@@ -42,6 +42,7 @@ class User extends CI_Model
      */
     public function update($id, $data)
     {
+        return $this->db->update('users', $data, array('id' => $id));
     }
 
     /**
@@ -61,12 +62,17 @@ class User extends CI_Model
      * @return boolean
      * 
      */
-    public function is_unique_email($email)
+    public function is_unique_email($email, $id)
     {
-        $result = $this->db->get_where('users', array('email' => $email));
-        if (empty($result->row_array())) {
+        $query = $this->db->get_where('users', array('email' => $email));
+        $result = $query->row_array();
+
+        if (empty($result)) {
+            return true;
+        } else if ($result['id'] === $id) {
             return true;
         }
+
         return false;
     }
 
@@ -93,6 +99,23 @@ class User extends CI_Model
                 return $result;
             } else {
 
+                return [];
+            }
+        }
+    }
+
+    public function password_match($password)
+    {
+        $result = $this->db
+            ->select('*')
+            ->from('users')
+            ->where('id', $this->session->userdata('id'))
+            ->get()
+            ->row_array();
+        if (!empty($result)) {
+            if (password_verify($password, $result['password'])) {
+                return $result;
+            } else {
                 return [];
             }
         }
