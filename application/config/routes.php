@@ -71,6 +71,7 @@ $route['api/v1/tasks/clear/(:any)'] = 'tasks/destroy_all/$1';
 $route['api/v1/tasks/edit/(:any)'] = 'tasks/edit/$1';
 $route['api/v1/tasks/update/(:any)'] = 'tasks/update/$1';
 $route['api/v1/tasks/(:any)'] = 'tasks/show/$1';
+$route['api/v1/tasks/delete/(:any)'] = 'tasks/destroy/$1';
 
 
 $route['404_override'] = '';

@@ -105,6 +105,9 @@ class Tasks extends CI_Controller
      */
     public function destroy($id)
     {
+        $this->task->delete($id);
+        $json_response['message'] = 'Successfully deleted task';
+        exit(json_encode($json_response));
     }
 
     /**

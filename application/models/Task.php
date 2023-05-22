@@ -61,6 +61,7 @@ class Task extends CI_Model
      */
     public function delete($id)
     {
+        return $this->db->delete('tasks', array('id' => $id));
     }
 
     /**

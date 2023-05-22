@@ -66,6 +66,7 @@
                 dataType: "json",
                 success: function(response) {
                     if (response.data.length) {
+                        $('#task-container').children().remove();
                         response.data.map(task => {
                             return $('#task-container').append(taskBlock(task.id, task.title, task.body, task.start_date, task.due_date, task.priority_level_code, task.status_code));
                         })
@@ -131,6 +132,23 @@
                 dataType: "html",
                 success: function(response) {
                     $('#app').append(response)
+                }
+            });
+        })
+
+        //click event for deleting task
+        $(document).on('click', '#delete-task', function(event) {
+            console.log('me delete')
+            const id = $(this).parent().siblings('input[name="id"]').val()
+            console.log(id)
+            event.stopPropagation();
+            $.ajax({
+                type: "post",
+                url: `api/v1/tasks/delete/${id}`,
+                dataType: "json",
+                success: function(response) {
+                    console.log(response)
+                    fetchTasks()
                 }
             });
         })
