@@ -11,12 +11,12 @@ $profile_picture = $this->session->userdata('profile_picture');
         <div class="collapse navbar-collapse my-3" id="navbarSupportedContent">
             <!-- Navigation Items -->
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0 d-flex justify-items-center align-items-center">
+                <div class="text-center fs-5">
+                    <span>Welcome back, <span class="text-capitalize"><?= $this->session->userdata('username') ?></span></span>
+                </div>
                 <li class="nav-item  d-block d-lg-none">
                     <a class="profile-button nav-link" type="button" role="button">Profile</a>
                 </li>
-                <div class="text-center fs-5">
-                    <span>Welcome back, <?= $this->session->userdata('username') ?></span>
-                </div>
                 <li class="nav-item  d-block d-lg-none">
                     <a class="logout-button nav-link" type="button" role="button">Logout</a>
                 </li>

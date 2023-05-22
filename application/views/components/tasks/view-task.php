@@ -1,5 +1,5 @@
 <div id="task-modal" class=" position-absolute top-0 start-0 vw-100 vh-100 grid place-items-center">
-    <div id="task-modal-overlay" class="bg-dark bg-opacity-75 vw-100 vh-100 position-absolute z-1">
+    <div id="task-modal-overlay" class="bg-dark bg-opacity-75 w-100 vh-100 position-absolute z-1">
 
     </div>
     <div class="card bg-dark z-3" style="min-width: 18rem; max-width: 24rem">
