@@ -23,7 +23,7 @@
 <script>
     $(document).ready(function() {
 
-
+        //Fetches tasks per user
         function fetchTasks() {
             const taskBlock = (id, title, body, startDate, dueDate, priorityLevel, status) => {
                 switch (priorityLevel) {
@@ -59,12 +59,12 @@
                 </?div>
                 `)
             };
+
             $.ajax({
                 type: "get",
                 url: "api/v1/tasks",
                 dataType: "json",
                 success: function(response) {
-                    console.log(response)
                     if (response.data.length) {
                         response.data.map(task => {
                             return $('#task-container').append(taskBlock(task.id, task.title, task.body, task.start_date, task.due_date, task.priority_level_code, task.status_code));
@@ -77,12 +77,16 @@
                 }
             });
         }
+        //End fetchTasks()
+
         fetchTasks();
 
+        //hover effect for each task card
         $('#app').on('mouseenter', '.task-card', function() {
             $(this).css('cursor', 'pointer')
         })
 
+        // click event for each task card
         $(document).on('click', '.task-card', function() {
             const id = $(this).children('input[name="id"]').val()
             const title = $(this).children('input[name="title"]').val()
@@ -103,6 +107,7 @@
             });
         })
 
+        //click event for adding task
         $('#add-task').on('click', function() {
             $('#add-task-form').toggle()
             if ($('#add-task-form').is(':visible')) {
@@ -116,11 +121,7 @@
             }
         });
 
-
-        $('.task-card').on('contextmenu', function() {
-            $(this).addClass('bg-primary')
-        }).draggable()
-
+        //click event for editing task
         $(document).on('click', '#edit-task', function(event) {
             const id = $(this).parent().siblings('input[name="id"]').val()
             event.stopPropagation();
@@ -134,6 +135,7 @@
             });
         })
 
+        //click event for clearing all tasks
         $(document).on('click', '#clear-tasks', function() {
             const userId = '<?= $this->session->userdata('id') ?>';
 
@@ -141,7 +143,6 @@
                 type: "delete",
                 url: `api/v1/tasks/clear/${userId}`,
                 success: function(response) {
-                    console.log('me reset');
                     fetchTasks();
                 },
                 error: function(error) {

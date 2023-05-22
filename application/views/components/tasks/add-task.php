@@ -63,8 +63,8 @@
                         <div class="mx-2 flex-grow-1">
                             <span>${dueDate}</span>
                         </div>
-                        <div class="p-2 text-primary"><i class="fa-solid fa-pencil"></i></div>
-                        <div class="p-2 text-danger"><i class="fa-solid fa-trash-can"></i></div>
+                        <div id="edit-task" class="p-2 text-primary"><i class="fa-solid fa-pencil"></i></div>
+                        <div id="delete-task" class="p-2 text-danger"><i class="fa-solid fa-trash-can"></i></div>
                     </div>
                     <input type="hidden" class="form-control" name="id"  value="${id}">
                     <input type="hidden" class="form-control" name="title"  value="${title}">
@@ -112,14 +112,6 @@
                     $('button[type=submit]').html('Save');
                     console.log(response);
 
-                    // this = form
-
-                    /**
-                     * form
-                     *  -input
-                     *  -textarea
-                     *      .val()
-                     */
                     $(this).find('input, textarea').each(function() {
                         $(this).val('');
                     })
