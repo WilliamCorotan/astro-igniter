@@ -69,6 +69,7 @@ $route['api/v1/tasks'] = 'tasks/get_all_by_user';
 $route['api/v1/tasks/store'] = 'tasks/store';
 $route['api/v1/tasks/clear/(:any)'] = 'tasks/destroy_all/$1';
 $route['api/v1/tasks/edit/(:any)'] = 'tasks/edit/$1';
+$route['api/v1/tasks/update/(:any)'] = 'tasks/update/$1';
 $route['api/v1/tasks/(:any)'] = 'tasks/show/$1';
 
 

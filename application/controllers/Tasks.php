@@ -81,6 +81,20 @@ class Tasks extends CI_Controller
      */
     public function update($id)
     {
+        $form_data = array(
+            'id' => $this->input->post('id'),
+            'title' => $this->input->post('title'),
+            'body' => $this->input->post('body'),
+            'status_id' => $this->input->post('status_id'),
+            'priority_level_id' => $this->input->post('priority_level_id'),
+            'start_date' => $this->input->post('start_date'),
+            'due_date' => $this->input->post('due_date'),
+        );
+
+        $this->task->update($id, $form_data);
+
+        $json_response['message'] = "Successfully updated task!";
+        exit(json_encode($json_response['message']));
     }
 
     /**

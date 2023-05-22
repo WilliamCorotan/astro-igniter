@@ -50,6 +50,7 @@ class Task extends CI_Model
      */
     public function update($id, $data)
     {
+        return $this->db->update('tasks', $data, array('id' => $id));
     }
 
     /**
