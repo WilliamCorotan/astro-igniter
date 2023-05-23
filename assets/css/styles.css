@@ -17,3 +17,11 @@
 .task-card:hover{
     cursor:pointer;
 }
+
+.w-64{
+    width: 16rem !important;
+}
+
+.h-64{
+    height: 16rem !important;
+}

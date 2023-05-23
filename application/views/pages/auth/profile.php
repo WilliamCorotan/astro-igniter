@@ -9,26 +9,43 @@ $profile_picture = $this->session->userdata('profile_picture');
         </div>
     </div>
     <div class="row">
-        <form id="update-profile-form" action="post" enctype="multipart/form-data" method="post">
 
-            <div class="col-lg-4 ">
-                <!-- Profile picture card-->
-                <div class="card mb-4 mb-lg-0 bg-transparent border-0">
-                    <div class="card-title px-3 mt-2">
-                        <h3>Profile Picture</h3>
-                    </div>
-                    <div class="card-body text-center row">
-                        <!-- Profile picture image-->
-                        <img class="img-account-profile rounded-circle mb-2 col-4 offset-4 col-lg-12 p-5" src="<?= base_url("/assets/images/profile_pictures/$profile_picture") ?>" alt="">
-                        <div id="profile-picture-info" class="d-none text-center">
-                            <div class="small font-italic text-muted mb-4">JPG or PNG no larger than 5 MB</div>
-                            <!-- Profile picture upload button-->
-                            <button class="btn btn-primary" type="button">Upload new image</button>
+
+        <div class="col-lg-4 ">
+            <!-- Profile picture card-->
+            <div class="card mb-4 mb-lg-0 bg-transparent border-0">
+                <div class="card-title px-3 mt-2">
+                    <h3>Profile Picture</h3>
+                </div>
+                <div class="card-body text-center grid place-items-center">
+                    <!-- Profile picture image-->
+                    <div class="">
+                        <div class="position-relative w-64 h-64 m-0">
+                            <div id="profile-picture-container position-relative" class="rounded-circle border border-5 bg-dark w-64 h-64">
+                                <img class="img-account-profile rounded-circle w-100 h-100 object-fit-cover" src="<?= base_url("/assets/images/profile_pictures/$profile_picture") ?>" alt="">
+                            </div>
+                            <div id="upload-icon" class="position-absolute m-3 end-0 bottom-0 text-dark bg-white rounded-circle border border-4 p-2">
+                                <i class="fa-solid fa-camera-retro fa-xl"></i>
+
+                            </div>
+
                         </div>
+
+                    </div>
+                    <div id="profile-picture-info" class="d-none text-center">
+
+                        <form id="profile-picture-form" method="post" enctype="multipart/form-data">
+                            <label for="profile-upload">
+                            </label>
+                            <input id="profile-upload" name="userfile" class="btn d-none" type="file" accept="image/*">
+                        </form>
+
                     </div>
                 </div>
             </div>
-            <div class="col-lg-8">
+        </div>
+        <div class="col-lg-8">
+            <form id="update-profile-form" method="post">
                 <!-- Account details card-->
                 <div class="card mb-4 bg-transparent  border-0">
                     <div class="card-title px-3 mt-2">
@@ -86,7 +103,7 @@ $profile_picture = $this->session->userdata('profile_picture');
                         </div>
                     </div>
                 </div>
-            </div>
+        </div>
         </form>
     </div>
 </div>
@@ -119,8 +136,9 @@ $profile_picture = $this->session->userdata('profile_picture');
 <script>
     $(document).ready(function() {
         //click event for the edit profile button
+        const spinner = `<div class="position-absolute top-50 start-50 translate-middle spinner-border text-secondary" role="status"> <span class = "visually-hidden" > Loading... </span> </div>`
         $('#edit-profile-button').on('click', function() {
-            console.log('is mee');
+
             $('.edit-password-fields').removeClass('d-none');
             $('.hidden').removeClass('d-none');
             $('.disabled-fields').removeAttr('disabled');
@@ -189,6 +207,43 @@ $profile_picture = $this->session->userdata('profile_picture');
                     console.log(response.responseText)
                 }
             });
+        })
+
+        //submit event for the profile picture upload
+        $('#profile-picture-form').on('submit', function(event) {
+            console.log('is mee: upload');
+            event.preventDefault();
+            let formData = new FormData();
+            const file = $('#profile-upload').get(0).files[0];
+            formData.append('file', file);
+
+            console.log(this);
+            console.log(formData);
+            $.ajax({
+                type: "post",
+                url: "profile/picture/update",
+                contentType: false,
+                processData: false,
+                cache: false,
+                data: formData,
+                dataType: "json",
+                beforeSend: function() {
+                    $('#profile-picture-container').append(spinner);
+                },
+                success: function(response) {
+                    console.log(response)
+
+                    $('.img-account-profile').attr('src', `<?= base_url("/assets/images/profile_pictures/") ?>${response.file_name}`);
+                }
+            });
+        })
+
+        $('#upload-icon').on('click', function(event) {
+            $('#profile-upload').trigger('click');
+        })
+
+        $('#profile-upload').on('change', function() {
+            $('#profile-picture-form').trigger('submit');
         })
     });
 </script>

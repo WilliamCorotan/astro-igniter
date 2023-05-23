@@ -60,6 +60,7 @@ $route['login/user'] = 'auth/login';
 $route['register/user'] = 'auth/register';
 $route['logout'] = 'auth/logout';
 $route['profile'] = 'auth/show_profile';
+$route['profile/picture/update'] = 'auth/upload_profile_picture';
 $route['profile/update'] = 'auth/update_profile';
 
 /**

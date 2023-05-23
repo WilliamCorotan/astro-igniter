@@ -15,7 +15,7 @@ $profile_picture = $this->session->userdata('profile_picture');
                     <span>Welcome back, <span class="text-capitalize"><?= $this->session->userdata('username') ?></span></span>
                 </div>
                 <li class="nav-item  d-block d-lg-none">
-                    <a class="profile-button nav-link" type="button" role="button">Profile</a>
+                    <a class="profile-button nav-link" href="/profile">Profile</a>
                 </li>
                 <li class="nav-item  d-block d-lg-none">
                     <a class="logout-button nav-link" type="button" role="button">Logout</a>
@@ -25,7 +25,7 @@ $profile_picture = $this->session->userdata('profile_picture');
                         <img src="<?= base_url("/assets/images/profile_pictures/$profile_picture") ?>" class="h-100" alt="" width="48px">
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a class="profile-button dropdown-item" type="button" role="button">Profile</a></li>
+                        <li><a class="profile-button dropdown-item" href="/profile">Profile</a></li>
                         <li>
                             <hr class="dropdown-divider">
                         </li>

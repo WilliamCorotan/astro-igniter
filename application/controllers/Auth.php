@@ -104,6 +104,33 @@ class Auth extends CI_Controller
         $this->load->view('partials/auth/auth-footer');
     }
 
+    public function upload_profile_picture()
+    {
+        $config['upload_path'] = './assets/images/profile_pictures/';
+        $config['allowed_types'] = 'gif|jpg|png';
+        $config['encrypt_name'] = TRUE;
+        $config['max_size'] = '5120000';
+
+        $this->upload->initialize($config);
+
+
+        if ($this->upload->do_upload('file')) {
+            $file_name = $this->upload->data('file_name');
+            $this->user->update($this->session->userdata('id'), array('profile_picture' => $file_name));
+            $this->session->set_userdata('profile_picture', $file_name);
+            $data = $this->upload->data();
+            $json_response['message'] = 'Successfully updated profile picture!';
+            $json_response['file_name'] = $file_name;
+            exit(json_encode($json_response));
+        } else {
+            $errors = array('error' => $this->upload->display_errors());
+            $json_response['message'] = $errors;
+            exit(json_encode($json_response));
+        }
+    }
+
+
+
     public function update_profile()
     {
         $this->form_validation->set_rules('username', 'username', 'required');
@@ -136,11 +163,11 @@ class Auth extends CI_Controller
     }
 
     /**
-     * 
+     *
      * Validates if the email is unique
      * @param string $email
      * @return boolean
-     * 
+     *
      */
     public function validate_unique_email($email)
     {
