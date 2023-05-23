@@ -10,6 +10,9 @@ class Tasks extends CI_Controller
      */
     public function index()
     {
+        if (empty($this->session->userdata('is_logged_in'))) {
+            redirect('login');
+        }
         $data['overflow'] = 'overflow-hidden';
         $this->load->view('partials/auth/auth-header', $data);
         $this->load->view('pages/tasks/index');
@@ -33,6 +36,10 @@ class Tasks extends CI_Controller
      */
     public function store()
     {
+        if (empty($this->session->userdata('is_logged_in'))) {
+            redirect('login');
+        }
+
         $data = array(
             'title' =>  $this->input->post('title'),
             'body' => $this->input->post('body'),
@@ -56,6 +63,10 @@ class Tasks extends CI_Controller
      */
     public function show($id)
     {
+        if (empty($this->session->userdata('is_logged_in'))) {
+            redirect('login');
+        }
+
         $result = $this->task->get($id);
         $view_modal = $this->load->view('components/tasks/view-task', $result);
         return $view_modal;
@@ -69,6 +80,10 @@ class Tasks extends CI_Controller
      */
     public function edit($id)
     {
+        if (empty($this->session->userdata('is_logged_in'))) {
+            redirect('login');
+        }
+
         $result = $this->task->get($id);
         $edit_modal = $this->load->view('components/tasks/edit-task', $result);
         return $edit_modal;
@@ -82,6 +97,10 @@ class Tasks extends CI_Controller
      */
     public function update($id)
     {
+        if (empty($this->session->userdata('is_logged_in'))) {
+            redirect('login');
+        }
+
         $form_data = array(
             'id' => $this->input->post('id'),
             'title' => $this->input->post('title'),
@@ -106,6 +125,10 @@ class Tasks extends CI_Controller
      */
     public function destroy($id)
     {
+        if (empty($this->session->userdata('is_logged_in'))) {
+            redirect('login');
+        }
+
         $this->task->delete($id);
         $json_response['message'] = 'Successfully deleted task';
         exit(json_encode($json_response));
@@ -119,6 +142,10 @@ class Tasks extends CI_Controller
      */
     public function destroy_all($user_id)
     {
+        if (empty($this->session->userdata('is_logged_in'))) {
+            redirect('login');
+        }
+
         $this->task->delete_all($user_id);
         $json_response['message'] = 'Successfully cleared all tasks';
         exit($json_response['message']);
@@ -127,6 +154,10 @@ class Tasks extends CI_Controller
 
     public function get_all_by_user()
     {
+        if (empty($this->session->userdata('is_logged_in'))) {
+            redirect('login');
+        }
+
         $json_response['data'] = $this->task->fetch_by_user($this->session->userdata('id'));
         exit(json_encode($json_response));
     }

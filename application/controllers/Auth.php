@@ -98,6 +98,10 @@ class Auth extends CI_Controller
 
     public function show_profile()
     {
+        if (empty($this->session->userdata('is_logged_in'))) {
+            redirect('login');
+        }
+
         $data['overflow'] = 'overflow-y-scroll';
         $this->load->view('partials/auth/auth-header', $data);
         $this->load->view('pages/auth/profile');
@@ -106,6 +110,10 @@ class Auth extends CI_Controller
 
     public function upload_profile_picture()
     {
+        if (empty($this->session->userdata('is_logged_in'))) {
+            redirect('login');
+        }
+
         $config['upload_path'] = './assets/images/profile_pictures/';
         $config['allowed_types'] = 'gif|jpg|png';
         $config['encrypt_name'] = TRUE;
@@ -118,7 +126,6 @@ class Auth extends CI_Controller
             $file_name = $this->upload->data('file_name');
             $this->user->update($this->session->userdata('id'), array('profile_picture' => $file_name));
             $this->session->set_userdata('profile_picture', $file_name);
-            $data = $this->upload->data();
             $json_response['message'] = 'Successfully updated profile picture!';
             $json_response['file_name'] = $file_name;
             exit(json_encode($json_response));
@@ -133,6 +140,10 @@ class Auth extends CI_Controller
 
     public function update_profile()
     {
+        if (empty($this->session->userdata('is_logged_in'))) {
+            redirect('login');
+        }
+
         $this->form_validation->set_rules('username', 'username', 'required');
         $this->form_validation->set_rules('email', 'email', 'required|valid_email|callback_validate_unique_email');
         $this->form_validation->set_rules('old_password', 'password', 'required|min_length[8]|max_length[255]|callback_validate_password');
@@ -171,6 +182,10 @@ class Auth extends CI_Controller
      */
     public function validate_unique_email($email)
     {
+        if (empty($this->session->userdata('is_logged_in'))) {
+            redirect('login');
+        }
+
         $this->form_validation->set_message('validate_unique_email', 'This email is taken.');
 
         if ($this->user->is_unique_email($email, $this->session->userdata('id'))) {
@@ -182,6 +197,10 @@ class Auth extends CI_Controller
 
     public function validate_password($password)
     {
+        if (empty($this->session->userdata('is_logged_in'))) {
+            redirect('login');
+        }
+
         $this->form_validation->set_message('validate_password', 'Invalid password');
 
         if ($this->user->password_match($password)) {
