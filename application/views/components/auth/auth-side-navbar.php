@@ -47,6 +47,7 @@
                 scroll: false
             });
 
+
             $(".sticky-close").on('click', function() {
                 $(this).parents('.drag-block').remove();
             })
