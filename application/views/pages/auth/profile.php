@@ -234,6 +234,7 @@ $profile_picture = $this->session->userdata('profile_picture');
                     console.log(response)
 
                     $('.img-account-profile').attr('src', `<?= base_url("/assets/images/profile_pictures/") ?>${response.file_name}`);
+                    $('.profile-picture').attr('src', `<?= base_url("/assets/images/profile_pictures/") ?>${response.file_name}`);
                 }
             });
         })

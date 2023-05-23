@@ -22,7 +22,7 @@ $profile_picture = $this->session->userdata('profile_picture');
                 </li>
                 <li class="nav-item dropdown d-lg-block d-none">
                     <a class="nav-link dropdown-toggle" type="button" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <img src="<?= base_url("/assets/images/profile_pictures/$profile_picture") ?>" class="h-100 rounded-circle" alt="" width="48px">
+                        <img src="<?= base_url("/assets/images/profile_pictures/$profile_picture") ?>" class="profile-picture h-100 rounded-circle" alt="" width="48px">
                     </a>
                     <ul class="dropdown-menu">
                         <li><a class="profile-button dropdown-item" href="/profile">Profile</a></li>
