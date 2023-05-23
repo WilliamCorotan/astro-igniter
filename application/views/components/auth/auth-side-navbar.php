@@ -1,7 +1,7 @@
 <ul class="list-group position-absolute m-4 fs-5">
     <li id="side-navbar-toggle" class="list-group-item d-inline-block text-bg-dark"><i class="fa-solid fa-bars"></i></li>
     <li id="side-navbar-task-toggle" class="list-group-item d-inline-block text-bg-dark"><i class="fa-solid fa-clipboard-list"></i></li>
-    <li class="list-group-item d-inline-block text-bg-dark"><i class="fa-solid fa-note-sticky"></i></li>
+    <li id="side-navbar-sticky-add" class="list-group-item d-inline-block text-bg-dark"><i class="fa-solid fa-note-sticky"></i></li>
     <li id="side-navbar-quote-toggle" class="list-group-item d-inline-block text-bg-dark"><i class="fa-solid fa-quote-right"></i></li>
 </ul>
 
@@ -36,6 +36,22 @@
                 $('#side-navbar-task-toggle').addClass('text-bg-dark')
                 $('#side-navbar-task-toggle').removeClass('text-bg-success')
             }
+        })
+
+        $('#side-navbar-sticky-add').on('click', function() {
+            const stickyNote = `<?php $this->load->view('components/sticky/sticky-block') ?>`
+            $('#app').append(stickyNote)
+
+            $(".draggable").draggable({
+                containment: "#app",
+                scroll: false
+            });
+
+            $(".sticky-close").on('click', function() {
+                $(this).parents('.drag-block').remove();
+            })
+
+
         })
 
 

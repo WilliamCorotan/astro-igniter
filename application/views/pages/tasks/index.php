@@ -3,6 +3,7 @@
 $this->load->view('components/auth/auth-side-navbar');
 $this->load->view('components/quote-block');
 $this->load->view('components/tasks/task-block');
+$this->load->view('components/sticky/sticky-block');
 ?>
 
 <script>
@@ -11,7 +12,7 @@ $this->load->view('components/tasks/task-block');
             containment: "#app",
             scroll: false
         });
-        $
+
 
         $('.close').on('click', function() {
             $(this).parents('.drag-block').hide();
