@@ -85,6 +85,8 @@ class Auth extends CI_Controller
             $json_response['message'] = 'Registered Successfully!';
             exit(json_encode($json_response));
         }
+
+        exit(json_encode(array("name" => 'test')));
     }
 
     public function logout()
@@ -182,9 +184,7 @@ class Auth extends CI_Controller
      */
     public function validate_unique_email($email)
     {
-        if (empty($this->session->userdata('is_logged_in'))) {
-            redirect('login');
-        }
+
 
         $this->form_validation->set_message('validate_unique_email', 'This email is taken.');
 
